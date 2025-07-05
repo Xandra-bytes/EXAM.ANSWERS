@@ -1,12 +1,20 @@
 
+/*
+ * TransactionRecord class demonstrating Encapsulation in EFRIS
+ * Protects sensitive transaction details using private fields with public accessors
+ */
 
 package com.mycompany.ura;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Encapsulated class for storing sensitive transaction details
+ * Uses private fields with public getter and setter methods
+ */
 public class TransactionRecord {
-   
+    // Private fields to protect sensitive data (Encapsulation)
     private String buyerTIN;
     private String sellerTIN;
     private String invoiceNumber;
@@ -23,6 +31,7 @@ public class TransactionRecord {
         this.transactionTimestamp = transactionTimestamp;
     }
     
+    // Public getter methods (Encapsulation - controlled access)
     public String getBuyerTIN() {
         return buyerTIN;
     }
@@ -43,6 +52,7 @@ public class TransactionRecord {
         return transactionTimestamp;
     }
     
+    // Public setter methods (Encapsulation - controlled modification)
     public void setBuyerTIN(String buyerTIN) {
         if (buyerTIN != null && !buyerTIN.trim().isEmpty()) {
             this.buyerTIN = buyerTIN;
@@ -71,6 +81,10 @@ public class TransactionRecord {
         this.transactionTimestamp = transactionTimestamp;
     }
     
+    /**
+     * Returns formatted transaction summary
+     * @return String representation of transaction details
+     */
     public String getTransactionSummary() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(transactionTimestamp);
@@ -78,6 +92,11 @@ public class TransactionRecord {
         return String.format("Invoice: %s | Buyer: %s | Seller: %s | Amount: UGX %.2f | Time: %s",
                 invoiceNumber, buyerTIN, sellerTIN, invoiceAmount, dateFormat.format(date));
     }
+    
+    /**
+     * Validates transaction data integrity
+     * @return true if all required fields are valid
+     */
     public boolean isValidTransaction() {
         return buyerTIN != null && !buyerTIN.trim().isEmpty() &&
                sellerTIN != null && !sellerTIN.trim().isEmpty() &&
